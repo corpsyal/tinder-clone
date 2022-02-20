@@ -34,7 +34,9 @@ class MessagesController: UITableViewController {
     func configureTableView(){
         tableView.rowHeight = 80
         
-        tableView.tableHeaderView = MatchHeader(user: user)
+        let matchHeader = MatchHeader(user: user)
+        matchHeader.delegate = self
+        tableView.tableHeaderView = matchHeader
         tableView.tableFooterView = UIView()
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
@@ -102,5 +104,15 @@ extension MessagesController {
         ])
         
         return view
+    }
+}
+
+extension MessagesController: MatchHeaderDelegate {
+    func startChatWith(_ match: Match) {
+        print("start chat with \(match.name)")
+        let chatController = ChatController(match: match)
+        navigationController?.pushViewController(chatController, animated: true)
+//        let nav = UINavigationController(rootViewController: ChatController())
+//        present(nav, animated: true, completion: nil)
     }
 }

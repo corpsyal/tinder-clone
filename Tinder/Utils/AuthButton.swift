@@ -13,8 +13,6 @@ class AuthButton: UIButton {
     
     override init(frame: CGRect){
         super.init(frame: frame)
-        setTitle("dd", for: .normal)
-        titleLabel?.text = "SDVSDDS"
         setTitleColor(.white, for: .normal)
         backgroundColor = AuthButton.disableBackgroundColor
         layer.cornerRadius = 5

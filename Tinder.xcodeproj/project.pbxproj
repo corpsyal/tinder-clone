@@ -43,6 +43,8 @@
 		93D8B02A26EBCF090005A972 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D8B02926EBCF090005A972 /* SettingsViewModel.swift */; };
 		93D9E7A526CC3A1F008BB9A2 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9E7A426CC3A1F008BB9A2 /* AuthService.swift */; };
 		93D9E7A826CC3A27008BB9A2 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9E7A726CC3A27008BB9A2 /* Service.swift */; };
+		93F75E9927C26892007CFDC2 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F75E9827C26892007CFDC2 /* ChatController.swift */; };
+		93F75E9B27C270B4007CFDC2 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F75E9A27C270B4007CFDC2 /* MessageCell.swift */; };
 		93FFEEFD26DADC4A0006C719 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FFEEFC26DADC4A0006C719 /* Constants.swift */; };
 		FE98C9AB587ACC34EB9CF35A /* Pods_Tinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1283DC54807035D8FFF1E840 /* Pods_Tinder.framework */; };
 /* End PBXBuildFile section */
@@ -89,6 +91,8 @@
 		93D8B02926EBCF090005A972 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		93D9E7A426CC3A1F008BB9A2 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		93D9E7A726CC3A27008BB9A2 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		93F75E9827C26892007CFDC2 /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
+		93F75E9A27C270B4007CFDC2 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		93FFEEFC26DADC4A0006C719 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,6 +179,7 @@
 				936F15FE26E50A3B0061DC3D /* SettingsController.swift */,
 				9346E44B2713211600E94DCC /* ProfileController.swift */,
 				9372A8E627BBF969004DC3FA /* MessagesController.swift */,
+				93F75E9827C26892007CFDC2 /* ChatController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 		9325A9CC269E0EA60031B1CB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				93F75E9C27C273BD007CFDC2 /* Messages */,
 				9339C60E270A089200550EEE /* Settings */,
 				9325A9D7269E17B20031B1CB /* HomeNavigationStackView.swift */,
 				9325A9DA269E39B80031B1CB /* BottomControlsStackView.swift */,
@@ -246,6 +252,14 @@
 				93BA518226B84A9D00983CB3 /* RegistrationController.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		93F75E9C27C273BD007CFDC2 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				93F75E9A27C270B4007CFDC2 /* MessageCell.swift */,
+			);
+			path = Messages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,12 +393,14 @@
 				9325A9D8269E17B20031B1CB /* HomeNavigationStackView.swift in Sources */,
 				9335FFEC27B183FE0004969D /* MatchView.swift in Sources */,
 				93BA518326B84A9D00983CB3 /* RegistrationController.swift in Sources */,
+				93F75E9B27C270B4007CFDC2 /* MessageCell.swift in Sources */,
 				93D9E7A826CC3A27008BB9A2 /* Service.swift in Sources */,
 				938C3A2427529A2F00FB135A /* ProfileViewModel.swift in Sources */,
 				9325A9D2269E0FDA0031B1CB /* HomeController.swift in Sources */,
 				935F7D3426BC38F400321DAD /* CustomTextField.swift in Sources */,
 				93CD57E827B9848200B1D980 /* MatchViewViewModel.swift in Sources */,
 				93D8B02726EBCB610005A972 /* SettingsCell.swift in Sources */,
+				93F75E9927C26892007CFDC2 /* ChatController.swift in Sources */,
 				9325A9D5269E12A70031B1CB /* Extensions.swift in Sources */,
 				936F160226E510B20061DC3D /* SettingsHeader.swift in Sources */,
 				935D45DA27BFE95D004CAA2D /* Match.swift in Sources */,

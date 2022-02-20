@@ -9,8 +9,13 @@ import UIKit
 
 let resuseIdentifierCell = "matchCell"
 
+protocol MatchHeaderDelegate: AnyObject {
+    func startChatWith(_ match: Match)
+}
+
 class MatchHeader: UIView {
     private let user: User
+    weak var delegate: MatchHeaderDelegate?
     
     private let newMatchesLabel: UILabel = {
         let label = UILabel()
@@ -78,6 +83,13 @@ extension MatchHeader: UICollectionViewDataSource {
         cell.match = user.matches[indexPath.row]
         //cell.backgroundColor = .yellow
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! MatchCell
+        guard let chatWith = cell.match else { return }
+        delegate?.startChatWith(chatWith)
+        
     }
     
 }
