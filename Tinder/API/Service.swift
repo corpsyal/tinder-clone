@@ -144,4 +144,22 @@ struct Service {
         }
     }
     
+    static func fetchChatForUserUid(_ uid: String, complete: @escaping (Chat)->Void){
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        let query = COLLECTION_MESSAGES.whereField("users", in: [[uid, currentUid], [currentUid, uid]])
+        
+        query.getDocuments { querySnapshots, error in
+            if error != nil {
+                print(error!)
+            }
+            
+            guard let document = querySnapshots!.documents.first else { return }
+            
+            let chat = Chat(dictionnary: document.data())
+            
+            complete(chat)
+        }
+    }
+    
 }
