@@ -10,11 +10,9 @@ import Foundation
 
 struct Chat {
     
-    let users: [String]
     let messages: [Message]
     
     init(dictionnary: [String: Any]){
-        users = dictionnary["users"] as? [String] ?? []
         messages = (
             (dictionnary["messages"] as? [[String: Any]]) ?? []
         ).map({ Message(dictionnary: $0)})

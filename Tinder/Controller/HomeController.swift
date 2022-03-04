@@ -68,6 +68,7 @@ class HomeController: UIViewController {
     
     func saveSwipeAndCheck(forUser user: User, like: Bool){
         guard let currentUser = self.user else { return }
+        if !like { return }
         Service.saveSwipe(forUser: user, liked: like) { error in
             print("Like save !")
             Service.checkLikeForUser(user) { match in
@@ -149,6 +150,7 @@ class HomeController: UIViewController {
                 let processedUser = topCardView.viewModel.user
                 topCardView.removeFromSuperview()
                 self.saveSwipeAndCheck(forUser: processedUser, like: shouldLike)
+                
             }
         } else {
             print("no view")

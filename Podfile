@@ -12,6 +12,7 @@ target 'Tinder' do
 	pod 'Firebase/Storage'
 	pod 'SDWebImage', '~> 5.0'
 	pod 'JGProgressHUD'
+  pod 'MessageKit', '~> 3.3.0'
 end
 
 post_install do |installer|

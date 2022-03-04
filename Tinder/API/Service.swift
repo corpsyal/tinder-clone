@@ -144,21 +144,55 @@ struct Service {
         }
     }
     
+    private static func makeChatIDForUser(_ uid: String) -> String {
+        let currentUid = Auth.auth().currentUser!.uid 
+        return [currentUid, uid].sorted().joined(separator: "_")
+    }
+    
     static func fetchChatForUserUid(_ uid: String, complete: @escaping (Chat)->Void){
-        guard let currentUid = Auth.auth().currentUser?.uid else { return }
-        
-        let query = COLLECTION_MESSAGES.whereField("users", in: [[uid, currentUid], [currentUid, uid]])
-        
-        query.getDocuments { querySnapshots, error in
+        COLLECTION_MESSAGES.document(self.makeChatIDForUser(uid)).getDocument { snapshot, error in
             if error != nil {
                 print(error!)
             }
             
-            guard let document = querySnapshots!.documents.first else { return }
-            
-            let chat = Chat(dictionnary: document.data())
+            guard let dictionnary = snapshot?.data() else {
+                return complete(Chat(dictionnary: [:]))
+            }
+            let chat = Chat(dictionnary: dictionnary)
             
             complete(chat)
+        }
+    }
+    
+    static func saveMessage(uid: String, message: Message, completion: @escaping () -> Void){
+        let documentID = self.makeChatIDForUser(uid)
+        
+        let messageData: [String: Any] = [
+            "from": message.from,
+            "content": message.content,
+            "id": message.id,
+            "read": message.read,
+            "time": message.time
+        ]
+        COLLECTION_MESSAGES.document(documentID).setData(["messages": FieldValue.arrayUnion([messageData])], merge: true) { _ in
+            completion()
+        }
+        
+    }
+    
+    static func waitForNewMessage(uid: String, completion: @escaping (Chat) -> Void){
+        let documentID = self.makeChatIDForUser(uid)
+        
+        COLLECTION_MESSAGES.document(documentID).addSnapshotListener { snapshot, error in
+         
+            guard let dictionnary = snapshot?.data() else {
+                return completion(Chat(dictionnary: [:]))
+            }
+
+            let chat = Chat(dictionnary: dictionnary)
+            
+            completion(chat)
+
         }
     }
     

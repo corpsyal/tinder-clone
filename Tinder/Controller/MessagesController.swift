@@ -46,7 +46,6 @@ class MessagesController: UITableViewController {
         let image = UIImageView(image: #imageLiteral(resourceName: "app_icon").withRenderingMode(.alwaysTemplate))
         image.tintColor = .lightGray
         
-        //image.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             image.widthAnchor.constraint(equalToConstant: 28),
             image.heightAnchor.constraint(equalToConstant: 28),
@@ -61,8 +60,6 @@ class MessagesController: UITableViewController {
         icon.tintColor = .systemPink
         
         navigationItem.titleView = icon
-        //navigationItem.title = "Match"
-        //navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     @objc func handleDismiss(){
@@ -110,9 +107,9 @@ extension MessagesController {
 extension MessagesController: MatchHeaderDelegate {
     func startChatWith(_ match: Match) {
         print("start chat with \(match.name)")
-        let chatController = ChatController(match: match)
+        //let chatController = ChatController(match: match)
+        let chatController = ChatMessageController(user: user, match: match)
         navigationController?.pushViewController(chatController, animated: true)
-//        let nav = UINavigationController(rootViewController: ChatController())
-//        present(nav, animated: true, completion: nil)
+        
     }
 }
