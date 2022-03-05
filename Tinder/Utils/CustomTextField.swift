@@ -11,8 +11,6 @@ class CustomTextField: UITextField {
     init(placeholder: String, isSecureTextEntry: Bool = false) {
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
-        //keyboardAppearance = .light
-        //overrideUserInterfaceStyle = .light
         self.isSecureTextEntry = isSecureTextEntry
         
         
@@ -25,7 +23,7 @@ class CustomTextField: UITextField {
         ])
         clearButtonMode = .whileEditing
         autocorrectionType = .no
-        //returnKeyType = .done
+        
         
         let paddingView = UIView()
         paddingView.widthAnchor.constraint(equalToConstant: 16).isActive = true
@@ -34,7 +32,6 @@ class CustomTextField: UITextField {
         
         heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        print("texfield init")
     }
     
     required init?(coder: NSCoder) {

@@ -15,7 +15,6 @@ class ChatMessageController: MessagesViewController {
     
     private let user: User
     private let match: Match
-    //private let matchUserAvatarImage = UIImage()
     private var messages: [MessageType] = []
     private var chat: Chat?
     
@@ -136,13 +135,9 @@ struct Sender: SenderType {
 
 struct ChatMessage: MessageType {
     var sender: SenderType
-    
     var messageId: String
-    
     var sentDate: Date
-    
     var kind: MessageKind
-    
 }
 
 extension ChatMessageController: MessagesDataSource {
@@ -168,7 +163,6 @@ extension ChatMessageController: MessagesDisplayDelegate {
         } else {
             avatarView.isHidden = false // because of cells are reused
             avatarView.sd_setImage(with: URL(string: match.profileURL), completed: nil)
-            //avatarView.set(avatar: Avatar()
         }
       
     }
@@ -178,13 +172,8 @@ extension ChatMessageController: MessagesLayoutDelegate {}
 
 extension ChatMessageController: InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
-        //print("didPressSendButtonWith", text)
         sendMessage(text)
         inputBar.inputTextView.text = ""
     }
-    
-//    func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {
-//        print("textViewTextDidChangeTo", text)
-//    }
     
 }

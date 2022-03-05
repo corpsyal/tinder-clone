@@ -31,7 +31,6 @@ struct Service {
     static func fetchUsers(forUser: User, onComplete: @escaping ([User]) -> Void){
         var users: [User] = []
         let query = COLLECTION_USERS
-            //.whereField("uid", isNotEqualTo: forUser.uid)
             .whereField("age", isGreaterThan: forUser.minSeekAge)
             .whereField("age", isLessThanOrEqualTo: forUser.maxSeekAge)
         
@@ -75,14 +74,12 @@ struct Service {
             "minSeekAge": user.minSeekAge,
             "maxSeekAge": user.maxSeekAge,
         ]
-        
         COLLECTION_USERS.document(user.uid).setData(data, merge: true, completion: completion)
     }
     
     static func uploadPhoto(photo: UIImage, userUid: String, onCompltete: @escaping (String) -> Void){
         guard let jpegData = photo.jpegData(compressionQuality: 0.75) else { return }
         let fileName = NSUUID().uuidString
-        
         let storage = Storage.storage()
         let ref = storage.reference(withPath: "/images/\(fileName)")
         
@@ -132,7 +129,6 @@ struct Service {
     }
     
     static func saveMatch(forUser: User, withUser: User, completion: @escaping () -> Void){
-       // guard let currentUid = Auth.auth().currentUser?.uid else { return }
         let match = [
             "uid": withUser.uid,
             "profileURL": withUser.imageURLs.first!,
@@ -166,7 +162,6 @@ struct Service {
     
     static func saveMessage(uid: String, message: Message, completion: @escaping () -> Void){
         let documentID = self.makeChatIDForUser(uid)
-        
         let messageData: [String: Any] = [
             "from": message.from,
             "content": message.content,
@@ -184,15 +179,11 @@ struct Service {
         let documentID = self.makeChatIDForUser(uid)
         
         COLLECTION_MESSAGES.document(documentID).addSnapshotListener { snapshot, error in
-         
             guard let dictionnary = snapshot?.data() else {
                 return completion(Chat(dictionnary: [:]))
             }
-
             let chat = Chat(dictionnary: dictionnary)
-            
             completion(chat)
-
         }
     }
     

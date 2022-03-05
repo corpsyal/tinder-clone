@@ -18,7 +18,6 @@ class HomeController: UIViewController {
             if let user = self.user {
                 settingsController = SettingsController(user: user)
                 messagesController = MessagesController(user: user)
-                //self.fetchUsers(forUser: user)
             }
         }
     }
@@ -26,7 +25,6 @@ class HomeController: UIViewController {
     private let bottomStack = BottomControlsStackView()
     private let deckView: UIView = {
         let view = UIView()
-        //view.backgroundColor = .systemPink
         view.layer.cornerRadius = 5
         view.backgroundColor = .white
         return view
@@ -54,7 +52,6 @@ class HomeController: UIViewController {
         guard let userUid = Auth.auth().currentUser?.uid else { return }
         Service.fetchUser(withUid: userUid) { (user) in
             self.user = user
-            
             guard let onComplete = onComplete else { return }
             onComplete(user)
         }
@@ -123,12 +120,10 @@ class HomeController: UIViewController {
     }
     
     func presentLoginController(){
-        //DispatchQueue.main.async {
             let controller = LoginController()
             let nav = UINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true, completion: nil)
-        //}
     }
     
     func getTopCardView() -> CardView? {
@@ -137,7 +132,6 @@ class HomeController: UIViewController {
     
     func performSwipeAnimation(shouldLike: Bool){
         let translation: CGFloat = shouldLike ? 700 : -700
-        //guard let topCardView = self.deckView.subviews.last as? CardView else { return }
         
         if let topCardView = getTopCardView() {
             UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut) {
@@ -165,14 +159,13 @@ class HomeController: UIViewController {
         matchView.delegate = self
         matchView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(matchView)
-//
+
         NSLayoutConstraint.activate([
             matchView.topAnchor.constraint(equalTo: view.topAnchor),
             matchView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             matchView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             matchView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        //matchView.configView()
     }
 }
 
@@ -228,9 +221,7 @@ extension HomeController: CardViewDelegate {
 
 extension HomeController: BottomControlsStackViewDelegate {
     func handleDislike() {
-        //guard let topCard = deckView.subviews.last as? CardView else { return }
         performSwipeAnimation(shouldLike: false)
-        //print("DEBUG: \(topCard.viewModel.user.name)")
     }
     
     func handleSuperLike() {
@@ -238,9 +229,6 @@ extension HomeController: BottomControlsStackViewDelegate {
     }
     
     func handleLike() {
-       // guard let topCard = deckView.subviews.last as? CardView else { return }
-        
-        //print("DEBUG: \(topCard.viewModel.user.name)")
         performSwipeAnimation(shouldLike: true)
     }
     
@@ -248,9 +236,7 @@ extension HomeController: BottomControlsStackViewDelegate {
 }
 
 extension HomeController: MatchViewDelegate {
-    
     func sendMessageTo(_ user: User) {
         print("SEND MESSAGE TO \(user.name)")
     }
-    
 }

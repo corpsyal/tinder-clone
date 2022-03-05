@@ -74,8 +74,6 @@ class ChatController: UIViewController {
         Service.fetchChatForUserUid(match.uid) { chat  in
             print(chat)
             self.chat = chat
-            //self.chatView.reloadData()
-            
         }
     }
     

@@ -41,7 +41,6 @@ class ChatCell: UITableViewCell {
         NSLayoutConstraint.activate([
             selfMessageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             selfMessageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            //selfMessageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             selfMessageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ])
         

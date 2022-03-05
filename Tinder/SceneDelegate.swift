@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         window?.overrideUserInterfaceStyle = .light
         window?.makeKeyAndVisible()
-        //try! Auth.auth().signOut()
+        
         if Auth.auth().currentUser == nil {
             window?.rootViewController = UINavigationController(rootViewController: LoginController())
         } else {

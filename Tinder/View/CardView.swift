@@ -28,15 +28,12 @@ class CardView: UIView {
     private let imageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
-        //iv.image = #imageLiteral(resourceName: "lady4c")
         return iv
     }()
     
     private var infoLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
-        
-        //label.attributedText = viewModel.userInfoLabel
         
         return label
     }()
@@ -60,13 +57,9 @@ class CardView: UIView {
         
         translatesAutoresizingMaskIntoConstraints = false
         
-        //imageView.image = viewModel.imageToShow
-        //print(viewModel.imageUrl)
-        
         imageView.sd_setImage(with: viewModel.imageUrl)
         infoLabel.attributedText = viewModel.userInfoLabel
         
-        //backgroundColor = .systemPurple
         layer.cornerRadius = 10
         clipsToBounds = true
         
@@ -135,9 +128,7 @@ class CardView: UIView {
             viewModel.showPreviousPhoto()
         }
         
-        //imageView.image = viewModel.imageToShow
         imageView.sd_setImage(with: viewModel.imageUrl, completed: nil)
-        
         barStackView.highlight(index: viewModel.index)
     }
     
@@ -164,16 +155,12 @@ class CardView: UIView {
             } else {
                 self.transform = .identity // reset position
             }
-            
-//            let rotationalTransform = CGAffineTransform(rotationAngle: 0)
-//            self.transform = rotationalTransform
         } completion: { (Bool) in
             if (shouldDismissCard) {
                 self.delegate?.saveLikeAfterAnim(user: self.viewModel.user, like: direction == .right)
                 self.removeFromSuperview()
                 
             }
-            print("animation did complete...")
         }
 
     }

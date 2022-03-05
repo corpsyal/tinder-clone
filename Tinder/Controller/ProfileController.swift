@@ -36,8 +36,6 @@ class ProfileController: UIViewController {
         cv.delegate = self
         cv.dataSource = self
         cv.showsHorizontalScrollIndicator = true
-        print(frame.height)
-        //cv.horizontalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: frame.height - 70, right: 0)
         cv.register(ProfileCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         return cv
     }()
@@ -173,7 +171,6 @@ extension ProfileController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProfileCell
         cell.imageView.sd_setImage(with: viewModel.images[indexPath.row])
-        //cell.contentView.frame = cell.bounds
         return cell
     }
     

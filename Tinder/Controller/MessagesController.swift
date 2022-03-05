@@ -106,8 +106,6 @@ extension MessagesController {
 
 extension MessagesController: MatchHeaderDelegate {
     func startChatWith(_ match: Match) {
-        print("start chat with \(match.name)")
-        //let chatController = ChatController(match: match)
         let chatController = ChatMessageController(user: user, match: match)
         navigationController?.pushViewController(chatController, animated: true)
         

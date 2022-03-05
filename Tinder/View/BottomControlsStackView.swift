@@ -48,9 +48,6 @@ class BottomControlsStackView: UIStackView {
         
         distribution = .equalCentering
         isLayoutMarginsRelativeArrangement = true
-        //layoutMargins = .init(top: 0, left: 16, bottom: 0, right: 16)
-        
-        //dislikeButton.addTarget(self, action: #selector(onDislike), for: .touchUpInside)
     }
     
     func configureButtons(){

@@ -13,7 +13,6 @@ class RegistrationController: UIViewController {
     private let selectPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "plus_photo"), for: .normal)
-        //button.backgroundColor = .black
         button.tintColor = .white
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
@@ -71,7 +70,6 @@ class RegistrationController: UIViewController {
     @objc func handleSelectPhoto(){
         let picker = UIImagePickerController()
         picker.delegate = self
-        //picker.modalPresentationStyle = .fullScreen
         present(picker, animated: true, completion: nil)
     }
     
@@ -88,7 +86,6 @@ class RegistrationController: UIViewController {
         
         AuthService.registerUser(credentials) { (userUid) in
             Service.uploadPhoto(photo: selectedPhoto, userUid: userUid) { (url) in
-                print(url)
                 hud.dismiss(animated: true)
             }
         }
@@ -101,28 +98,20 @@ class RegistrationController: UIViewController {
     
     @objc func onEmailChange(sender: UITextField){
         viewModel.email = sender.text
-        //print(viewModel.email)
-        //print(viewModel.password)
-        print(viewModel.formIsValid)
         checkFormStatus()
     }
     
     @objc func onFullNameChange(sender: UITextField){
         viewModel.fullName = sender.text
-        //print(viewModel.email)
-        //print(viewModel.password)
-        print(viewModel.formIsValid)
         checkFormStatus()
     }
     
     @objc func onPasswordChange(sender: UITextField){
         viewModel.password = sender.text
-        print(viewModel.formIsValid)
         checkFormStatus()
     }
     
     func checkFormStatus(){
-        print("check status")
         if viewModel.formIsValid {
             registerButton.isEnabled = true
             registerButton.backgroundColor = AuthButton.enableBackgroundColor
@@ -142,7 +131,6 @@ class RegistrationController: UIViewController {
         let stackView = UIStackView(arrangedSubviews: [emailTextField, fullNameTextField, passwordTextField, registerButton])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        //stackView.backgroundColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
         stackView.spacing = 16
         
         view.addSubview(stackView)
@@ -173,11 +161,10 @@ extension RegistrationController: UIImagePickerControllerDelegate ,UINavigationC
         viewModel.selectedPhoto = image
         
         selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
-        
+
         selectPhotoButton.layer.borderColor = UIColor(white: 1, alpha: 1).cgColor
         selectPhotoButton.layer.borderWidth = 2
         selectPhotoButton.layer.cornerRadius = 10
-        //selectPhotoButton.imageView?.layer.cornerRadius = 10
         
         checkFormStatus()
         

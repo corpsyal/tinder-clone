@@ -16,12 +16,9 @@ class CardViewModel {
     var index: Int { return imageIndex }
     let imageUrls: [String]
     var imageUrl: URL?
-    
-    //var imageToShow: UIImage?
-    
+
     init(user: User) {
         self.user = user
-        //self.imageToShow = user.images.first
         
         let attributedText = NSMutableAttributedString(string: user.name, attributes: [
             .font: UIFont.systemFont(ofSize: 32, weight: .heavy),
@@ -34,9 +31,6 @@ class CardViewModel {
         ]))
         
         self.userInfoLabel = attributedText
-//        if let url = user.imageURLs.first {
-//            self.imageUrl = URL(string: url)
-//        }
         self.imageUrls = user.imageURLs
         self.imageUrl = URL(string: self.imageUrls.first ?? "")
         
@@ -53,7 +47,6 @@ class CardViewModel {
         imageIndex += 1
         print(imageIndex, imageUrls)
         self.imageUrl = URL(string: imageUrls[imageIndex])
-        //self.imageToShow = user.images[imageIndex]
     }
     
     func showPreviousPhoto(){
@@ -62,6 +55,5 @@ class CardViewModel {
         }
         imageIndex -= 1
         self.imageUrl = URL(string: imageUrls[imageIndex])
-        //self.imageToShow = user.images[imageIndex]
     }
 }

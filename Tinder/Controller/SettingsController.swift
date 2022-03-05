@@ -88,12 +88,8 @@ class SettingsController: UITableViewController {
     }
     
     func setButtonImage(_ image: UIImage){
-        //guard let index = imageIndex else { return }
         guard let button = headerView.buttons[imageIndex] as UIButton? else { return }
     
-        print("inside")
-        print(button.tag)
-        
         button.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
         button.setTitle(nil, for: .normal)
     }
@@ -113,7 +109,6 @@ class SettingsController: UITableViewController {
                 self.user.imageURLs.append(imageUrl)
             }
 
-            //self.user.imageURLs.append(imageUrl)
             hud.dismiss(animated: true)
         }
     }
@@ -169,10 +164,6 @@ extension SettingsController {
         return section == SettingsSections.ageRange ? 96 : 44
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("toto")
-    }
-    
 }
 
 // MARK: - UIImagePickerControllerDelegate
@@ -197,7 +188,6 @@ extension SettingsController: UINavigationControllerDelegate, UIImagePickerContr
 extension SettingsController: SettingCellDelegate {
     
     func settingsCell(_ cell: SettingsCell, wantsToUpdateUserWith value: String, for section: SettingsSections) {
-        print(value, section)
         
         switch section {
             case .name:
@@ -211,8 +201,6 @@ extension SettingsController: SettingCellDelegate {
             case .ageRange:
                 break
         }
-        
-        //print("DEBUG user is \(user)")
     }
     
     func settingsCell(_ cell: SettingsCell, wantsToUpdateAgeWith sender: UISlider) {

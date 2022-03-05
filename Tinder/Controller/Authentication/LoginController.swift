@@ -10,15 +10,6 @@ import JGProgressHUD
 
 class LoginController: UIViewController {
     
-    init(){
-        super.init(nibName: nil, bundle: nil)
-        print("LoginController init")
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     private let iconImageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -95,37 +86,22 @@ class LoginController: UIViewController {
             guard let window = self.view.window else { return }
             let home = HomeController()
             home.modalPresentationStyle = .fullScreen
-//            UIView.transition(with: window,
-//                              duration: 1,
-//                              options: [.trans, .curveEaseIn],
-//                              animations: nil,
-//                              completion: nil)
-//
+
             window.rootViewController = HomeController()
             
             UIView.transition(with: window, duration: 0.2, options: [.transitionCrossDissolve], animations: nil, completion: nil)
-            
-           //self.navigationController?.pushViewController(home, animated: true)
-            
-            //self.dismiss(animated: true, completion: nil)
-            
-            //(UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(HomeController())
-
             
         }
     }
     
     @objc func handleShowRegistration(){
         navigationController?.pushViewController(RegistrationController(), animated: true)
-        //present(RegistrationController(), animated: true, completion: nil)
     }
     
     func configureUI(){
         emailTextField.keyboardType = .emailAddress
-        //view.translatesAutoresizingMaskIntoConstraints = false
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
-        //view.backgroundColor = .systemPink
         configureGradientLayer()
         
         view.addSubview(iconImageView)

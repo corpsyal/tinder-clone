@@ -18,7 +18,6 @@ class ProfileCell: UICollectionViewCell {
         
         imageView.contentMode = .scaleAspectFill
         addSubview(imageView)
-       // imageView.fillSuperview()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         print(imageView.superview!)

@@ -31,7 +31,6 @@ class MatchHeader: UIView {
         layout.headerReferenceSize = CGSize(width: 16, height: 0)
         layout.footerReferenceSize = CGSize(width: 16, height: 0)
         layout.scrollDirection = .horizontal
-        //layout.minimumLineSpacing = 0
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.showsHorizontalScrollIndicator = false
@@ -39,18 +38,13 @@ class MatchHeader: UIView {
         cv.dataSource = self
         cv.register(MatchCell.self, forCellWithReuseIdentifier: resuseIdentifierCell)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        //cv.backgroundColor = .systemPink
+        
         return cv
     }()
     
     init(user: User) {
         self.user = user
-        //let screen = UIScreen.main.bounds.width
-        //super.init(frame: .zero)
         super.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 200))
-//        print(UIScreen.main.bounds)
-//        print(frame.width)
-        //backgroundColor = .systemBlue
         
         addSubview(newMatchesLabel)
         NSLayoutConstraint.activate([
@@ -81,7 +75,7 @@ extension MatchHeader: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: resuseIdentifierCell, for: indexPath) as! MatchCell
         cell.match = user.matches[indexPath.row]
-        //cell.backgroundColor = .yellow
+        
         return cell
     }
     
