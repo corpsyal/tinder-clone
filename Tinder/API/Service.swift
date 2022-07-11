@@ -21,7 +21,7 @@ struct Service {
             }
             
             guard let dictionnary = snapshot?.data() else { return }
-        
+            
             let user = User(dictionnary: dictionnary)
             
             onCompltete(user)
@@ -99,9 +99,9 @@ struct Service {
                     //COLLECTION_USERS.document(userUid).setData(["imageURLs" : [url]], merge: true)
                     onCompltete(url)
                 }
-
+                
             })
-
+            
         }
     }
     
@@ -114,6 +114,29 @@ struct Service {
         
         COLLECTION_SWIPES.document(uid).setData(data, merge: true, completion: completion)
     }
+    
+    static func listeningForNewMatchs(completion: @escaping ((User) -> Void)){
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        COLLECTION_USERS.whereField("uid", isEqualTo: uid).addSnapshotListener { snapshot, error in
+            guard let snapshot = snapshot else { return }
+            
+            snapshot.documentChanges.forEach { diff in
+                print(diff.type.rawValue)
+                if (diff.type == .modified) {
+                    let user = User(dictionnary: diff.document.data())
+                    if let match = user.matches.first {
+                        self.fetchUser(withUid: match.uid) { user in
+                            completion(user)
+                        }
+                    }
+                    
+                }
+            }
+        }
+        
+    }
+    
     
     static func checkLikeForUser(_ user: User, completion: @escaping (Bool) -> Void){
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
@@ -141,7 +164,7 @@ struct Service {
     }
     
     private static func makeChatIDForUser(_ uid: String) -> String {
-        let currentUid = Auth.auth().currentUser!.uid 
+        let currentUid = Auth.auth().currentUser!.uid
         return [currentUid, uid].sorted().joined(separator: "_")
     }
     

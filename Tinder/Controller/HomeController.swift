@@ -39,6 +39,10 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureCards()
+        Service.listeningForNewMatchs { user in
+            self.presentMatchView(matchedUser: user)
+            self.fetchUser()
+        }
         fetchUser { user in
             self.fetchUsers(forUser: user)
         }
@@ -72,8 +76,8 @@ class HomeController: UIViewController {
                 if match {
                     Service.saveMatch(forUser: currentUser, withUser: user) {
                         Service.saveMatch(forUser: user, withUser: currentUser) {
-                            self.presentMatchView(matchedUser: user)
-                            self.fetchUser()
+//                            self.presentMatchView(matchedUser: user)
+//                            self.fetchUser()
                         }
                     }
                 }
